@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 
     const { exec } = require("child_process");
 
-    exec("ls -la", (error, stdout, stderr) => {
+    exec("wsynth.exe", (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
             return;

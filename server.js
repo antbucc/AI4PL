@@ -13,15 +13,13 @@ app.get('/', (req, res) => {
 
     const { exec } = require('child_process');
 
-    exec('_wsynth.exe', ['-model_type', 'dn', '-out_type', 'dot', '-algo', 'agaf_then_acyclic_preferences', '-agaf', 'states', '-mono', '-dynamic', '-reachability_analysis', './test.smv'], (err, stdout, stderr) => {
-        if (err) {
-            console.error(`exec error: ${err}`);
-            res.json('{ errore: ' + `exec error: ${err}` + '}');
-            return;
-        }
+    const { execFile } = require('child_process');
 
-        console.log(`Number of files ${stdout}`);
-        res.json('{ success: ' + `Number of files ${stdout}` + '}');
+    const child = execFile('chrome.exe', [], (error, stdout, stderr) => {
+        if (error) {
+            throw error;
+        }
+        console.log(stdout);
     });
 
     /* var exec = require('child_process').exec;

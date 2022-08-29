@@ -10,20 +10,37 @@ const HOST = '0.0.0.0';
 const app = express();
 app.get('/', (req, res) => {
     console.log("eccolo");
-    var exec = require('child_process').exec;
 
-    exec('wsynth.exe', ['-model_type', 'dn', '-out_type', 'dot', '-algo', 'agaf_then_acyclic_preferences', '-agaf', 'states', '-mono', '-dynamic', '-reachability_analysis', './test.smv'], function (err, data) {
-        if (err) {
-            console.log("ERRORE: " + err);
-            res.json('{ Error: ' + err + '}');
+    const { exec } = require("child_process");
+
+    exec("ls -la", (error, stdout, stderr) => {
+        if (error) {
+            console.log(`error: ${error.message}`);
+            return;
         }
-        else {
-            console.log("OK: " + data.toString());
-            res.json('{ success: ' + data + '}');
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
         }
+        console.log(`stdout: ${stdout}`);
+        res.json(`stdout: ${stdout}`);
+
     });
 
-
+    /*  var exec = require('child_process').exec;
+  
+      exec('wsynth.exe', ['-model_type', 'dn', '-out_type', 'dot', '-algo', 'agaf_then_acyclic_preferences', '-agaf', 'states', '-mono', '-dynamic', '-reachability_analysis', './test.smv'], function (err, data) {
+          if (err) {
+              console.log("ERRORE: " + err);
+              res.json('{ Error: ' + err + '}');
+          }
+          else {
+              console.log("OK: " + data.toString());
+              res.json('{ success: ' + data + '}');
+          }
+      });
+  
+  */
 
 
 });

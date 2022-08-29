@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 
     const { exec } = require('child_process');
 
-    exec('wsynth', ['-model_type', 'dn', '-out_type', 'dot', '-algo', 'agaf_then_acyclic_preferences', '-agaf', 'states', '-mono', '-dynamic', '-reachability_analysis', './test.smv'], (err, stdout, stderr) => {
+    exec('wsynth.exe', ['-model_type', 'dn', '-out_type', 'dot', '-algo', 'agaf_then_acyclic_preferences', '-agaf', 'states', '-mono', '-dynamic', '-reachability_analysis', './test.smv'], (err, stdout, stderr) => {
         if (err) {
             console.error(`exec error: ${err}`);
             res.json('{ errore: ' + `exec error: ${err}` + '}');

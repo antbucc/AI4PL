@@ -14,11 +14,13 @@ app.get('/', (req, res) => {
 
     execFile('wsynth.exe', ['-model_type', 'dn', '-out_type', 'dot', '-algo', 'agaf_then_acyclic_preferences', '-agaf', 'states', '-mono', '-dynamic', '-reachability_analysis', './test.smv'], function (err, data) {
         if (err) {
-            res.json('{ success: false }')
+            console.log("ERRORE: " + err);
+            res.json('{ Error: ' + err + '}');
         }
-        else
+        else {
             console.log("OK: " + data.toString());
-        res.json('{ success: true }')
+            res.json('{ success: ' + data + '}');
+        }
     });
 
 

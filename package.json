@@ -1,0 +1,13 @@
+{
+    "name": "ai4pl",
+    "version": "1.0.0",
+    "description": "ai4pl on Docker",
+    "author": "Antonio Bucchiarone <bucchiarone@fbk.eu>",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.16.1"
+    }
+}

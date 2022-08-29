@@ -1,0 +1,11 @@
+wsynth.exe -model_type dn -out_type dot -algo agaf_then_acyclic_preferences -agaf states -mono -dynamic -reachability_analysis file.smv > .\output.dot
+
+
+# Build docker image
+sudo docker build -t  ai4pl .
+# Build docker container
+docker run -d -p 3000:5000 --name antbucc ai4pl
+
+docker ps (see the port )  0.0.0.0:3000->5000
+curl -i 0.0.0.0:3000
+

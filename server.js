@@ -10,7 +10,18 @@ const HOST = '0.0.0.0';
 const app = express();
 app.get('/', (req, res) => {
     console.log("eccolo");
-    res.json('{ success: true }')
+    var execFile = require('child_process').execFile;
+
+    execFile('wsynth.exe', ['-model_type', 'dn', '-out_type', 'dot', '-algo', 'agaf_then_acyclic_preferences', '-agaf', 'states', '-mono', '-dynamic', '-reachability_analysis', './test.smv'], function (err, data) {
+        if (err) {
+            res.json('{ success: false }')
+        }
+        else
+            console.log("OK: " + data.toString());
+        res.json('{ success: true }')
+    });
+
+
 
 
 });

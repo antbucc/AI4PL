@@ -9,34 +9,18 @@ const HOST = '0.0.0.0';
 // App
 const app = express();
 app.get('/', (req, res) => {
-    console.log("eccolo");
+    var exec = require('child_process').exec;
 
-    const { exec } = require('child_process');
-
-    const { execFile } = require('child_process');
-
-    const child = execFile('chrome.exe', [], (error, stdout, stderr) => {
-        if (error) {
-            throw error;
+    exec('wsynth.exe', ['-model_type', 'dn', '-out_type', 'dot', '-algo', 'agaf_then_acyclic_preferences', '-agaf', 'states', '-mono', '-dynamic', '-reachability_analysis', './test.smv'], function (err, data) {
+        if (err) {
+            console.log("ERRORE: " + err);
+            res.json('{ Error: ' + err + '}');
         }
-        console.log(stdout);
+        else {
+            console.log("OK: " + data.toString());
+            res.json('{ success: ' + data + '}');
+        }
     });
-
-    /* var exec = require('child_process').exec;
- 
-     exec('wsynth.exe', ['-model_type', 'dn', '-out_type', 'dot', '-algo', 'agaf_then_acyclic_preferences', '-agaf', 'states', '-mono', '-dynamic', '-reachability_analysis', './test.smv'], function (err, data) {
-         if (err) {
-             console.log("ERRORE: " + err);
-             res.json('{ Error: ' + err + '}');
-         }
-         else {
-             console.log("OK: " + data.toString());
-             res.json('{ success: ' + data + '}');
-         }
-     });
- 
- */
-
 
 });
 app.post('/', (req, res) => {
